@@ -1,4 +1,4 @@
- # -*- Dentro de las cosas que se trataron en la reunion con Fabian (Gerente de operaciones y despachos de Soquimich) -*-
+ # -*- Dentro de las cosas que se trataron en la reunion con Moises (Gerente de operaciones y despachos de Soquimich) -*-
 
 1. ## Dolores
 - Pago de Transporte.
@@ -21,7 +21,7 @@
 
 4. ## Sistematica de Trabajo de Logistica
 - - Camion sale de la **Bodega A** de Soquimich con su respectiva **carga Z**, y **guia de despacho**, rumbo hacia **Puerto Montt**
-- - Una vez que el camion llega a su **Destino**, entrega su **carga Z**, y cliente firma la **recepcion conforme de la guia**
+- - Una vez que el camion llega a su **Destino**, entrega su **carga Z**, y cliente firma la **recepcion conforme de la guia*
 - - La **Guia** se envia hacia Santiago (responsabilidad del Transportista)
 - - Una vez la **guia** llega a las oficinas de Soquimich (Santiago), Fabian transcribe la info de la guia manualmente a su excel
 - - Una vez se ingresa, Fabian rellena ciertas casillas (columnas y nombres) de la **proforma de pago** (Recien ahi el Transportista sabe realmente cuanto le pagaran por el flete)
@@ -32,6 +32,7 @@
 
 5. ## Ventajas Tecnicas 
 - - Contamos con el apoyo de un empresario transportista con gran trayectoria, quien ademas es activo cliente de SQM.
+- - Conocimiento pleno logica y sistematica del negocio de Logistica de Transporte.
 - - Informacion precisa respecto a los procesos, dolores y necesidades de nuestro cliente (sqm)
 - - Cercania con area gerencia de logistica de sqm
 - - Extrema necesidad por parte del cliente 
@@ -39,11 +40,3 @@
 - - Recientemente adquirieron una plataforma, la cual quedo en stand by debido a mal funcionamiento. (La problematica y necesidad sigue en pie desde hace mucho tiempo, y no han podido darle una solucion)
 - - Gran expectativa al proyecto
 - - Cliente dispuesto a colaborar activamente (facilitando informacion y feedback de avances), y a gestionar reuniones presenciales.
-
-6. ## Desventajas Tecnicas y Practicas para el Desarrollo de producto (Debilidades)
-- - Falta de conocimiento de uso de librerias de lenguajes
-- - Tiempo para dedicar al proyecto
-- - Falta de conocimiento en manejo de datos y databases
-- - Falta de experiencia en produccion de plataformas 
-- - Falta de conocimientos de frontend y backend
-- - Carga cognitiva alta, y alta responsabilidad dado la magnitud del proyecto y cliente.
