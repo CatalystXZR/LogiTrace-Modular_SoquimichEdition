@@ -1,45 +1,55 @@
-# Modular Freight Proforma System
-A technical solution designed to streamline the creation, validation, and traceability of freight proformas in real-world logistics environments. Built for operations involving multiple transport providers, where documentation and responsibility must be clear, auditable, and scalable.
+# LogiTrace
 
-## Orchestrated Modular Architecture
-The system is composed of independent modules, each with a specific responsibility. This allows for isolated validation, progressive evolution, and operational flexibility.
+**LogiTrace** is a **modular web platform for logistics management**, designed to fully adapt to the processes and requirements of each client. Modules are **custom-built based on client needs**, optimizing workflows, providing **process tracking**, and facilitating audits through a **comprehensive logging system**.
 
-### CARGO_MANAGER.py
-- `add_fletes(data)`: Adds new freight entries to the system.
-- `collect_tolls(data)`: Calculates tolls associated with each trip.
-- `select_client(name_or_rut)`: Selects a client by name or national ID.
-- `autocomplete_client(client_id)`: Autocompletes client data based on ID.
+## Architecture
 
-### PROFORMA_CALCULATOR.cc
-- `calculate_flete_cost(flete)`: Computes base freight cost.
-- `calculate_subtotals(ws)`: Calculates subtotals by category.
-- `calculate_total_general(ws)`: Computes the overall total of the proforma.
-- `format_tariff_output(flete)`: Formats tariff output for presentation.
+LogiTrace follows an **orchestrator architecture**, allowing seamless integration and communication between independent modules. Each module operates autonomously but is coordinated centrally to ensure smooth process flow and real-time visibility.
 
-### DATABASE_MANAGER.py
-- `load_excel(filename)`: Loads Excel file as data source.
-- `get_existing_clients(ws)`: Retrieves registered clients.
-- `find_client(ws, name_or_rut)`: Searches for a client by name or ID.
-- `get_client_history(ws, client_id)`: Retrieves freight history for a given client.
+## Example Modules
 
-### DATABASE_WRITER.py
-- `insert_flete(ws, flete)`: Inserts a new freight entry into the database.
-- `update_totals(ws)`: Updates overall totals.
-- `update_tariffs(ws)`: Updates tariffs based on defined parameters.
+- **Quotations / Proformas** – Creation, tracking, and status management (Pending, In Process, Paid)
+- **Shipping Guides** – Management and tracking of delivery guides
+- **Inventory Management** – Real-time monitoring of stock levels and movements
+- **Reports & Analytics** – Custom reports for operational insights
 
-### Scalability
-Each module is designed to adapt to different operational contexts, cargo types, and business models. The system can evolve without requiring a full rewrite, supporting long-term growth and customization.
+> Additional modules can be developed according to each client’s unique requirements.
 
-## Operational Integration
-This system was designed based on direct observation of real logistics workflows. It is not a theoretical model, but a functional architecture intended for phased implementation and field validation.
+## Demo
 
-## Authors
-***Matías Toledo*** — Product Lead  
-***Benjamin Contreras*** — Lead Developer
+A demo version of LogiTrace is currently **under development**. For inquiries or to request a demo, please contact the development team.
 
+## Team
 
-## License
-This project is currently unlicensed.  
-All rights reserved by the authors.  
-Use, distribution, or modification is not permitted without explicit permission.
+- **Matías Toledo** – Product Lead  
+- **Benjamin Contreras** – Developer Lead  
 
+## Roadmap
+
+- Complete core module development (Proformas, Guides, Inventory)  
+- Implement advanced tracking and logging system  
+- Build demo for early feedback  
+- Expand modules based on client requests  
+- Prepare for beta testing and community contributions  
+
+## Contributions
+
+We **welcome collaborators and contributors**! Any help, feedback, or ideas are appreciated **for the love of the project**, as there is currently **no budget for paid contributions**.
+
+### How to Contribute
+
+1. Fork the repository  
+2. Create a feature branch (`git checkout -b feature-name`)  
+3. Commit your changes (`git commit -m 'Add new feature'`)  
+4. Push to the branch (`git push origin feature-name`)  
+5. Open a Pull Request  
+
+## Contact
+
+For questions, suggestions, or demo requests, please contact:  
+**Email:** CatalystXZR@proton.me
+**Instagram:** _catalystxzr_
+
+## Staff
+- CatalystXZR - **Product Lead**
+- Benjamin Contreras - **Developer Lead**
