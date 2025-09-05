@@ -36,14 +36,6 @@ A demo version of LogiTrace is currently **under development**. For inquiries or
 
 We **welcome collaborators and contributors**! Any help, feedback, or ideas are appreciated **for the love of the project**, as there is currently **no budget for paid contributions**.
 
-### How to Contribute
-
-1. Fork the repository  
-2. Create a feature branch (`git checkout -b feature-name`)  
-3. Commit your changes (`git commit -m 'Add new feature'`)  
-4. Push to the branch (`git push origin feature-name`)  
-5. Open a Pull Request  
-
 ## Contact
 
 For questions, suggestions, or demo requests, please contact:  
