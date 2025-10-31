@@ -42,5 +42,5 @@ For questions, suggestions, or demo requests, please contact:  
 **Email:** CatalystXZR@proton.me
 
 ## Staff
-- CatalystXZR - **Product Lead**
+- Matias Toledo - **Product Lead**
 - Benjamin Contreras - **Developer Lead**
