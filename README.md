@@ -40,7 +40,6 @@ We **welcome collaborators and contributors**! Any help, feedback, or ideas are 
 
 For questions, suggestions, or demo requests, please contact:  
 **Email:** CatalystXZR@proton.me
-**Instagram:** _catalystxzr_
 
 ## Staff
 - CatalystXZR - **Product Lead**
