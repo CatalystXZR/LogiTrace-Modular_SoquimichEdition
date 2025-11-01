@@ -5,10 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdio> // Para std::remove (borrar archivos)
-//aaa me llamo matias hola como estas todo bien y tu?
-//Como estan todoos
-
-
+//Y ahora esto igual se va a actualizar??
 // Implementación de 'generarReporte'
 bool DatabaseManager::generarReporte(const Transportista& transportista) const {
     // 'const' al final, porque este método no modifica al DatabaseManager.
