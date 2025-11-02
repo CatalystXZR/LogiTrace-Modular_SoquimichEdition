@@ -2,7 +2,7 @@
 #include <iostream>
 #include <limits> // Para std::numeric_limits
 #include <string>
-
+using namespace std;
 // Método principal que corre el bucle del menú
 void LogiTraceManager::run() {  //Como este es el orquestador, con el metodo run(), ejecutamos los metodos de databasemanager. Aqui, esta la colaboracion de objetos.
     bool corriendo = true;
@@ -19,10 +19,10 @@ void LogiTraceManager::run() {  //Como este es el orquestador, con el metodo run
             case 6: opcionEliminarReporteGuardado(); break;
             case 7:
                 corriendo = false;
-                std::cout << "Saliendo de LogiTrace... Adios!" << std::endl;
+                cout << "Saliendo de LogiTrace... Adios!" << endl;
                 break;
             default:
-                std::cerr << "!! Opcion no valida. Intente de nuevo." << std::endl;
+                cerr << "!! Opcion no valida. Intente de nuevo." << endl;
                 break;
         }
         if (corriendo) {
@@ -35,22 +35,22 @@ void LogiTraceManager::run() {  //Como este es el orquestador, con el metodo run
 void LogiTraceManager::mostrarMenu() const {
     // system("cls"); // Descomentar en Windows para limpiar pantalla
     // system("clear"); // Descomentar en Linux/Mac para limpiar pantalla
-    std::cout << "\n========================================" << std::endl;
-    std::cout << "  Bienvenido a LogiTrace v1.0" << std::endl;
-    std::cout << "========================================" << std::endl;
-    std::cout << "1. Agregar Flete (Create)" << std::endl;
-    std::cout << "2. Ver Resumen Transportista (Read)" << std::endl;
-    std::cout << "3. Actualizar Flete (Update)" << std::endl;
-    std::cout << "4. Eliminar Flete (Delete)" << std::endl;
-    std::cout << "5. Generar Reporte Final y Facturar" << std::endl;
-    std::cout << "6. Eliminar Reporte Guardado" << std::endl;
-    std::cout << "7. Salir" << std::endl;
-    std::cout << "========================================" << std::endl;
+    cout << "\n========================================" << endl;
+    cout << "  Bienvenido a LogiTrace v1.0" << endl;
+    cout << "========================================" << endl;
+    cout << "1. Agregar Flete (Create)" << endl;
+    cout << "2. Ver Resumen Transportista (Read)" << endl;
+    cout << "3. Actualizar Flete (Update)" << endl;
+    cout << "4. Eliminar Flete (Delete)" << endl;
+    cout << "5. Generar Reporte Final y Facturar" << endl;
+    cout << "6. Eliminar Reporte Guardado" << endl;
+    cout << "7. Salir" << endl;
+    cout << "========================================" << endl;
 }
 
 // --- CREATE  ---
 void LogiTraceManager::opcionAgregarFlete() {
-    std::cout << "-- [Agregar Flete] --" << std::endl;
+    cout << "-- [Agregar Flete] --" << endl;
     int rut = leerEntero("Ingrese RUT de transportista (sin dig. verif.): ");
     
     // Busca al transportista. Si no existe, lo crea.
@@ -68,7 +68,7 @@ void LogiTraceManager::opcionAgregarFlete() {
 
 // --- READ  ---
 void LogiTraceManager::opcionMostrarResumen() {
-    std::cout << "-- [Ver Resumen] --" << std::endl;
+    cout << "-- [Ver Resumen] --" << endl;
     int rut = leerEntero("Ingrese RUT de transportista: ");
     
     // Buscamos en el 'map'
@@ -77,18 +77,18 @@ void LogiTraceManager::opcionMostrarResumen() {
         // 'it->second' es el objeto Transportista
         it->second.mostrarResumen();
     } else {
-        std::cerr << "!! Error: Transportista con RUT " << rut << " no encontrado." << std::endl;
+        cerr << "!! Error: Transportista con RUT " << rut << " no encontrado." << endl;
     }
 }
 
 // --- UPDATE  ---
 void LogiTraceManager::opcionActualizarFlete() {
-    std::cout << "-- [Actualizar Flete] --" << std::endl;
+    cout << "-- [Actualizar Flete] --" << endl;
     int rut = leerEntero("Ingrese RUT de transportista: ");
     
     auto it = transportistas.find(rut);
     if (it == transportistas.end()) {
-        std::cerr << "!! Error: Transportista no encontrado." << std::endl;
+        cerr << "!! Error: Transportista no encontrado." << endl;
         return;
     }
 
@@ -97,46 +97,46 @@ void LogiTraceManager::opcionActualizarFlete() {
     
     // De nuevo, delegamos la tarea
     if (it->second.actualizarFlete(idFlete, nuevaCantidad)) {
-        std::cout << ">> Flete ID " << idFlete << " actualizado exitosamente." << std::endl;
+        cout << ">> Flete ID " << idFlete << " actualizado exitosamente." << endl;
     } else {
-        std::cerr << "!! Error: Flete con ID " << idFlete << " no encontrado." << std::endl;
+        cerr << "!! Error: Flete con ID " << idFlete << " no encontrado." << endl;
     }
 }
 
 // --- DELETE  ---
 void LogiTraceManager::opcionEliminarFlete() {
-    std::cout << "-- [Eliminar Flete] --" << std::endl;
+    cout << "-- [Eliminar Flete] --" << endl;
     int rut = leerEntero("Ingrese RUT de transportista: ");
 
     auto it = transportistas.find(rut);
     if (it == transportistas.end()) {
-        std::cerr << "!! Error: Transportista no encontrado." << std::endl;
+        cerr << "!! Error: Transportista no encontrado." << endl;
         return;
     }
 
     int idFlete = leerEntero("Ingrese ID del flete a eliminar: ");
 
     if (it->second.eliminarFlete(idFlete)) {
-        std::cout << ">> Flete ID " << idFlete << " eliminado exitosamente." << std::endl;
+        cout << ">> Flete ID " << idFlete << " eliminado exitosamente." << endl;
     } else {
-        std::cerr << "!! Error: Flete con ID " << idFlete << " no encontrado." << std::endl;
+        cerr << "!! Error: Flete con ID " << idFlete << " no encontrado." << endl;
     }
 }
 
 // Lógica de 'DATABASE_WRITER'
 void LogiTraceManager::opcionGenerarReporteFinal() {
-    std::cout << "-- [Generar Reporte Final] --" << std::endl;
+    cout << "-- [Generar Reporte Final] --" << endl;
     int rut = leerEntero("Ingrese RUT de transportista a facturar: ");
 
     auto it = transportistas.find(rut);
     if (it == transportistas.end()) {
-        std::cerr << "!! Error: Transportista no encontrado." << std::endl;
+        cerr << "!! Error: Transportista no encontrado." << endl;
         return;
     }
     
     Transportista& transportista = it->second;
 
-    std::cout << "Generando reporte para " << transportista.getNombre() << "..." << std::endl;
+    cout << "Generando reporte para " << transportista.getNombre() << "..." << endl;
     
     // --- COLABORACIÓN [cite: 30] ---
     // El Manager colabora con el dbManager, pasándole el objeto
@@ -146,26 +146,26 @@ void LogiTraceManager::opcionGenerarReporteFinal() {
         // (como pediste en el brief)
         transportista.facturar();
     } else {
-        std::cerr << "!! Error al generar el reporte. No se facturara." << std::endl;
+        cerr << "!! Error al generar el reporte. No se facturara." << endl;
     }
 }
 
 // Lógica de 'DATABASE_WRITER' (Borrar)
 void LogiTraceManager::opcionEliminarReporteGuardado() {
-    std::cout << "-- [Eliminar Reporte Guardado] --" << std::endl;
+    cout << "-- [Eliminar Reporte Guardado] --" << endl;
     if (transportistas.empty()) {
-        std::cout << "No hay transportistas registrados para borrar reportes." << std::endl;
+        cout << "No hay transportistas registrados para borrar reportes." << endl;
         return;
     }
 
-    std::cout << "Transportistas con reportes potenciales:" << std::endl;
+    cout << "Transportistas con reportes potenciales:" << endl;
     listarTransportistas(); // Mostramos la lista
     
     int rut = leerEntero("Ingrese RUT del transportista cuyo reporte desea eliminar: ");
 
     auto it = transportistas.find(rut);
     if (it == transportistas.end()) {
-        std::cerr << "!! Error: Transportista no encontrado." << std::endl;
+        cerr << "!! Error: Transportista no encontrado." << endl;
         return;
     }
 
@@ -177,31 +177,31 @@ void LogiTraceManager::opcionEliminarReporteGuardado() {
 // --- Métodos Ayudantes ---
 
 void LogiTraceManager::pausarConsola() const {
-    std::cout << "\nPresione Enter para continuar..." << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    if (std::cin.gcount() == 0) {
+    cout << "\nPresione Enter para continuar..." << endl;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    if (cin.gcount() == 0) {
         // Si el ignore anterior no hizo nada (porque el buffer ya estaba limpio)
         // esperamos un nuevo Enter.
-        std::cin.get();
+        cin.get();
     }
 }
 
 // Función segura para leer un entero y evitar que el programa crashee
 // si el usuario ingresa letras.
-int LogiTraceManager::leerEntero(const std::string& prompt) {
+int LogiTraceManager::leerEntero(const string& prompt) {
     int valor;
     while (true) {
-        std::cout << prompt;
-        std::cin >> valor;
+        cout << prompt;
+        cin >> valor;
 
-        if (std::cin.fail()) {
-            std::cin.clear(); // Limpia el flag de error
+        if (cin.fail()) {
+            cin.clear(); // Limpia el flag de error
             // Descarta la línea incorrecta del buffer
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cerr << "!! Entrada invalida. Por favor ingrese un numero." << std::endl;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cerr << "!! Entrada invalida. Por favor ingrese un numero." << endl;
         } else {
             // Descarta cualquier cosa extra en la línea (ej. "123abc")
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             return valor;
         }
     }
@@ -218,16 +218,16 @@ Transportista* LogiTraceManager::getTransportista(int rut) {
     }
 
     // Si no existe, lo creamos
-    std::cout << "Transportista nuevo. Ingrese nombre de la empresa: ";
-    std::string nombre;
-    std::getline(std::cin, nombre);
+    cout << "Transportista nuevo. Ingrese nombre de la empresa: ";
+    string nombre;
+    getline(cin, nombre);
 
     // Creamos y movemos el nuevo transportista al 'map'.
     // Usamos 'emplace' que es más eficiente que 'insert'.
     auto resultado = transportistas.emplace(
-        std::piecewise_construct,
-        std::forward_as_tuple(rut),
-        std::forward_as_tuple(nombre, rut)
+        piecewise_construct,
+        forward_as_tuple(rut),
+        forward_as_tuple(nombre, rut)
     );
 
     // Devolvemos un puntero al objeto recién creado
@@ -239,7 +239,7 @@ void LogiTraceManager::listarTransportistas() const {
     for (const auto& par : transportistas) {
         // par.first es el RUT (la key)
         // par.second es el Transportista (el value)
-        std::cout << i++ << ". " << par.second.getNombre()
-                  << " (RUT: " << par.first << ")" << std::endl;
+        cout << i++ << ". " << par.second.getNombre()
+                  << " (RUT: " << par.first << ")" << endl;
     }
 }

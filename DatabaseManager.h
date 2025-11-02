@@ -19,9 +19,9 @@ public:
     bool generarReporte(const Transportista& transportista) const;
 
     // Borra un reporte basado en los datos
-    bool eliminarReporte(const std::string& nombreEmpresa, int rut) const;
+    bool eliminarReporte(const string& nombreEmpresa, int rut) const;
 
 private:
     // Ayudante privado para generar el nombre del archivo
-    std::string getFilename(const std::string& nombre, int rut) const;
+    string getFilename(const string& nombre, int rut) const;
 };

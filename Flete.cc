@@ -1,6 +1,7 @@
 #include "Flete.h"
 #include <iostream>
 #include <iomanip> // Para std::setprecision
+using namespace std;
 
 // Definimos e inicializamos la variable estática.
 const double Flete::PRECIO_POR_MAXISACO = 87000.0;
@@ -17,10 +18,10 @@ double Flete::calcularCosto() const {
 
 // Implementación del método para mostrar detalles
 void Flete::mostrarDetalle() const {
-    std::cout << "    -> ID Flete: " << idServicio
+    cout << "    -> ID Flete: " << idServicio
               << " | Cantidad: " << cantidadCarga << " maxisacos"
-              << " | Costo: $" << std::fixed << std::setprecision(0) << calcularCosto()
-              << std::endl;
+              << " | Costo: $" << fixed << setprecision(0) << calcularCosto()
+              << endl;
 }
 
 // Implementación del método para actualizar (el "Update" del CRUD)

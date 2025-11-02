@@ -1,4 +1,5 @@
 #include "LogiTraceManager.h"
+using namespace std;
 
 // El main.cpp es nuestro punto de entrada.
 // Gracias al patrón Facade, es INCREÍBLEMENTE simple.
