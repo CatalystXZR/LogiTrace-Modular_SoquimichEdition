@@ -24,9 +24,7 @@ public:
 
     bool agregarFlete(int id, int cantidad); // C
     
-    // --- MODIFICADO ---
-    // Añadido 'const' para que LogiTraceManager pueda llamarlo
-    // sin modificar el objeto (mejora de diseño).
+// Agregamos el const, para que la clase LogiTraceManager pueda llamar este metodo, para que printee en pantalla la info existente.
     void mostrarResumen() const; // R
     
     bool actualizarFlete(int idFlete, int nuevaCantidad); // U

@@ -2,10 +2,9 @@
 #include <iostream>
 #include <limits> 
 #include <utility> 
-
 using namespace std;
 
-// Método principal
+// metodo principal de esta clase
 void LogiTraceManager::run() {
     bool corriendo = true;
     while (corriendo) {
@@ -33,7 +32,7 @@ void LogiTraceManager::run() {
     }
 }
 
-// Muestra el menú
+//menu inicial de opciones a elegir
 void LogiTraceManager::mostrarMenu() const {
     cout << "\n========================================" << endl;
     cout << "  Bienvenido a LogiTrace v1.0" << endl;
@@ -48,17 +47,16 @@ void LogiTraceManager::mostrarMenu() const {
     cout << "========================================" << endl;
 }
 
-// --- CREATE (MODIFICADO) ---
-void LogiTraceManager::opcionAgregarFlete() {
+// --- CREATE ---
+void LogiTraceManager::opcionAgregarFlete() { //Metodo propio
     cout << "-- [Agregar Flete] --" << endl;
     
-    // --- NUEVA LÓGICA: Mostrar transportistas existentes ---
-    if (!transportistas.empty()) {
+
+    if (!transportistas.empty()) { //Encapsulamiento y composicion, el metodo opcionAgregarFlete, accede a la clase Transportista, y ejecuta su metodo, pero con la info de la clase transportista
         cout << "Transportistas existentes:" << endl;
-        listarTransportistas();
+        listarTransportistas(); //Colaboracion interna entre metodos propios de la misma clase (cohesion). el metodo opcionAgregarFlete, llama al metodo listarTransportistas, para completar su funcion
         cout << "----------------------------------------" << endl;
     }
-    // --- FIN NUEVA LÓGICA ---
     
     int rut = leerEntero("Ingrese RUT de transportista (o uno nuevo): ");
     
@@ -75,11 +73,10 @@ void LogiTraceManager::opcionAgregarFlete() {
     }
 }
 
-// --- READ (MODIFICADO) ---
+// --- READ ---
 void LogiTraceManager::opcionMostrarResumen() {
     cout << "-- [Ver Resumen] --" << endl;
     
-    // --- NUEVA LÓGICA: Mostrar transportistas existentes ---
     if (transportistas.empty()) {
         cout << "No hay transportistas registrados." << endl;
         return;
@@ -87,7 +84,6 @@ void LogiTraceManager::opcionMostrarResumen() {
     cout << "Transportistas existentes:" << endl;
     listarTransportistas();
     cout << "----------------------------------------" << endl;
-    // --- FIN NUEVA LÓGICA ---
 
     int rut = leerEntero("Ingrese RUT de transportista: ");
     
@@ -99,11 +95,11 @@ void LogiTraceManager::opcionMostrarResumen() {
     }
 }
 
-// --- UPDATE (MODIFICADO) ---
+// --- UPDATE ---
 void LogiTraceManager::opcionActualizarFlete() {
     cout << "-- [Actualizar Flete] --" << endl;
 
-    // --- NUEVA LÓGICA: Mostrar transportistas existentes ---
+    // --- mostrar transportistas que han sido ingresados ---
     if (transportistas.empty()) {
         cout << "No hay transportistas para actualizar." << endl;
         return;
@@ -111,7 +107,7 @@ void LogiTraceManager::opcionActualizarFlete() {
     cout << "Transportistas existentes:" << endl;
     listarTransportistas();
     cout << "----------------------------------------" << endl;
-    // --- FIN NUEVA LÓGICA ---
+
     
     int rut = leerEntero("Ingrese RUT de transportista: ");
     
@@ -121,10 +117,9 @@ void LogiTraceManager::opcionActualizarFlete() {
         return;
     }
 
-    // --- NUEVA LÓGICA: Mostrar fletes de ESE transportista ---
+    // --- mostrar fletes del transportista seleccionado ---
     cout << "Fletes actuales del transportista:" << endl;
-    it->second.mostrarResumen(); // Usamos el resumen para mostrar los fletes
-    // --- FIN NUEVA LÓGICA ---
+    it->second.mostrarResumen(); // Usamos el metodo resumen para mostrar los fletes
 
     int idFlete = leerEntero("Ingrese ID del flete a modificar: ");
     int nuevaCantidad = leerEntero("Ingrese la NUEVA cantidad de maxisacos: ");
@@ -136,11 +131,11 @@ void LogiTraceManager::opcionActualizarFlete() {
     }
 }
 
-// --- DELETE (MODIFICADO) ---
+// --- DELETE  ---
 void LogiTraceManager::opcionEliminarFlete() {
     cout << "-- [Eliminar Flete] --" << endl;
 
-    // --- NUEVA LÓGICA: Mostrar transportistas existentes ---
+    // --- mostrar transportistas que han sido ingresados ---
     if (transportistas.empty()) {
         cout << "No hay transportistas para eliminar." << endl;
         return;
@@ -148,7 +143,7 @@ void LogiTraceManager::opcionEliminarFlete() {
     cout << "Transportistas existentes:" << endl;
     listarTransportistas();
     cout << "----------------------------------------" << endl;
-    // --- FIN NUEVA LÓGICA ---
+
 
     int rut = leerEntero("Ingrese RUT de transportista: ");
 
@@ -158,10 +153,10 @@ void LogiTraceManager::opcionEliminarFlete() {
         return;
     }
 
-    // --- NUEVA LÓGICA: Mostrar fletes de ESE transportista ---
+    // --- mostrar fletes del transportista seleccionado ---
     cout << "Fletes actuales del transportista:" << endl;
     it->second.mostrarResumen();
-    // --- FIN NUEVA LÓGICA ---
+
 
     int idFlete = leerEntero("Ingrese ID del flete a eliminar: ");
 
@@ -172,11 +167,11 @@ void LogiTraceManager::opcionEliminarFlete() {
     }
 }
 
-// --- GENERAR REPORTE (MODIFICADO) ---
+// --- generacion de reporte en csv ---
 void LogiTraceManager::opcionGenerarReporteFinal() {
     cout << "-- [Generar Reporte Final] --" << endl;
 
-    // --- NUEVA LÓGICA: Mostrar transportistas existentes ---
+    // --- mostrar transportistas que han sido ingresados ---
     if (transportistas.empty()) {
         cout << "No hay transportistas para generar reportes." << endl;
         return;
@@ -184,7 +179,6 @@ void LogiTraceManager::opcionGenerarReporteFinal() {
     cout << "Transportistas existentes:" << endl;
     listarTransportistas();
     cout << "----------------------------------------" << endl;
-    // --- FIN NUEVA LÓGICA ---
 
     int rut = leerEntero("Ingrese RUT de transportista a facturar: ");
 
@@ -204,11 +198,10 @@ void LogiTraceManager::opcionGenerarReporteFinal() {
     }
 }
 
-// --- ELIMINAR REPORTE (MODIFICADO) ---
+// --- eliminar reporte generado en el csv ---
 void LogiTraceManager::opcionEliminarReporteGuardado() {
     cout << "-- [Eliminar Reporte Guardado] --" << endl;
     
-    // --- LÓGICA EXISTENTE (ya cumplía el requisito) ---
     if (transportistas.empty()) {
         cout << "No hay transportistas registrados para borrar reportes." << endl;
         return;
@@ -216,7 +209,7 @@ void LogiTraceManager::opcionEliminarReporteGuardado() {
     cout << "Transportistas con reportes potenciales:" << endl;
     listarTransportistas(); 
     cout << "----------------------------------------" << endl;
-    // --- FIN LÓGICA EXISTENTE ---
+
     
     int rut = leerEntero("Ingrese RUT del transportista cuyo reporte desea eliminar: ");
 
@@ -230,16 +223,16 @@ void LogiTraceManager::opcionEliminarReporteGuardado() {
 }
 
 
-// --- Métodos Ayudantes ---
-
+// --- metodos que ayudan ---
+//Este metodo, es el que permite la funcion de "ingrese enter para continuar"
 void LogiTraceManager::pausarConsola() const {
-    cout << "\nPresione Enter para continuar..." << endl;
+    cout << "Presione Enter para continuar..." << endl;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     if (cin.gcount() == 0) {
         cin.get();
     }
 }
-
+//validacion de errores de dataentry
 int LogiTraceManager::leerEntero(const string& prompt) {
     int valor;
     while (true) {
@@ -256,9 +249,11 @@ int LogiTraceManager::leerEntero(const string& prompt) {
         }
     }
 }
+// la idea de esta funcion, es obtener un puntero a un objeto "transportista" basado en su rut, utilizando un map / tabla hash/ diccionario de python
 
-Transportista* LogiTraceManager::getTransportista(int rut) {
-    auto it = transportistas.find(rut);
+
+Transportista* LogiTraceManager::getTransportista(int rut) { 
+    auto it = transportistas.find(rut); //map
     
     if (it != transportistas.end()) {
         return &(it->second); 

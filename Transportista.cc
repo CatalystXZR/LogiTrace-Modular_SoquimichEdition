@@ -1,9 +1,8 @@
-#include "Transportista.h"
-#include "Flete.h" 
+#include "Transportista.h" //Incluimos este archivo, ya que nuestro .cc necesita conocer la definicion de su clase, y saber en que y como trabajara.
+#include "Flete.h" //Incluimos este archivo, ya que nuestra clase Transportista.cc necesita conocer la definicion completa de la clase Flete.
 #include <iostream>
 #include <iomanip>   
 #include <algorithm> 
-
 using namespace std;
 
 Transportista::Transportista(const std::string& nombre, int r) 
@@ -30,6 +29,7 @@ void Transportista::recalcularCostoTotal() {
     }
 }
 
+//COMPOSICION 
 bool Transportista::agregarFlete(int id, int cantidad) {
     if (fleteExiste(id)) {
         return false; 
@@ -39,8 +39,7 @@ bool Transportista::agregarFlete(int id, int cantidad) {
     return true; 
 }
 
-// --- MODIFICADO ---
-// Añadida la palabra 'const' al final
+
 void Transportista::mostrarResumen() const {
     cout << "\n=== RESUMEN DE TRANSPORTISTA ===" << endl;
     cout << "Empresa: " << nombreEmpresa << " | RUT: " << rut << endl;

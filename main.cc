@@ -1,13 +1,10 @@
-#include "LogiTraceManager.h" // Solo necesita conocer al Orquestador
+#include "LogiTraceManager.h" // Solo necesita conocer al Orquestador de nuestro sistema
 
 using namespace std;
 
-// El main.cpp es nuestro punto de entrada.
 int main() {
-    // 1. Creamos el objeto principal
+    // 1. Creamos el objeto principal para que funcione todo y luego simplemente lo ejecutamos.
     LogiTraceManager miSistemaLogiTrace;
-
-    // 2. Lo ejecutamos
     miSistemaLogiTrace.run();
 
     return 0;

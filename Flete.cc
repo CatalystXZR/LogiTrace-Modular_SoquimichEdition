@@ -1,17 +1,15 @@
-#include "Flete.h" // Incluye su propio encabezado
+#include "Flete.h" // Incluye su propio encabezado, para corroborar que esta funcion Flete.cc esta implementando todo lo que prometimos en el .h, y que todo coincide segun lo que dijimos que hariamos en el .h
 #include <iostream>
-#include <iomanip> // Para std::setprecision
+#include <iomanip> // Para setprecision
 
 using namespace std;
 
-// Definimos e inicializamos la variable estática.
 const double Flete::PRECIO_POR_MAXISACO = 87000.0;
 
-// Constructor: Llama al constructor de la clase base (Servicio)
+// HERENCIA Llama al constructor de la clase base (Servicio)
 Flete::Flete(int id, int carga)
     : Servicio(id), cantidadCarga(carga) {}
 
-// Implementación de la lógica de negocio
 double Flete::calcularCosto() const {
     return cantidadCarga * PRECIO_POR_MAXISACO;
 }
@@ -24,7 +22,7 @@ void Flete::mostrarDetalle() const {
               << endl;
 }
 
-// Implementación del método para actualizar (el "Update" del CRUD)
+// --- UPDATE --- (metodo para actualizar la info de los fletes)
 void Flete::setCantidad(int nuevaCantidad) {
     this->cantidadCarga = nuevaCantidad;
 }
