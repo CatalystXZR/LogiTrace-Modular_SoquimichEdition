@@ -1,114 +1,95 @@
 #include "Transportista.h"
-#include "Flete.h" // Necesitamos incluir Flete para poder crearlos
+#include "Flete.h" 
 #include <iostream>
-#include <iomanip> // Para fixed, setprecision
-#include <numeric> // Para accumulate
-#include <algorithm> // Para find_if
+#include <iomanip>   
+#include <algorithm> 
+
 using namespace std;
 
-// Constructor
-Transportista::Transportista(const string& nombre, int rut)
-    : nombreEmpresa(nombre), rutEmpresa(rut) {}
+Transportista::Transportista(const std::string& nombre, int r) 
+    : nombreEmpresa(nombre), rut(r), costoTotal(0.0) {}
 
-// Getters
-string Transportista::getNombre() const { return nombreEmpresa; }
-int Transportista::getRut() const { return rutEmpresa; }
-const vector<unique_ptr<Servicio>>& Transportista::getFletes() const {
-    return fletes;
-}
+std::string Transportista::getNombre() const { return nombreEmpresa; }
+int Transportista::getRut() const { return rut; }
+double Transportista::getCostoTotal() const { return costoTotal; }
+const std::vector<std::unique_ptr<Servicio>>& Transportista::getFletes() const { return fletes; }
 
-// CREATE 
-void Transportista::agregarFlete(int idFlete, int cantidadCarga) {
-    // Creamos un NUEVO objeto Flete en el 'heap' y lo guardamos
-    // en nuestro vector usando un puntero inteligente.
-    // make_unique es la forma comoda y segura de hacerlo.
-    fletes.push_back(make_unique<Flete>(idFlete, cantidadCarga));
-    cout << ">> Flete ID " << idFlete << " agregado exitosamente a "
-              << nombreEmpresa << "." << endl;
-}
-
-// READ 
-void Transportista::mostrarResumen() const {
-    cout << "----------------------------------------" << endl;
-    cout << "RESUMEN PROFORMA" << endl;
-    cout << "CLIENTE: " << nombreEmpresa << " - RUT: " << rutEmpresa << endl;
-    cout << "----------------------------------------" << endl;
-    cout << "DETALLE DE FLETES:" << endl;
-
-    if (fletes.empty()) {
-        cout << "  (Sin fletes registrados)" << endl;
-    } else {
-        // --- POLIMORFISMO EN ACCIÓN [cite: 15, 23] ---
-        // Iteramos sobre el vector de 'Servicio*'.
-        // Cuando llamamos a flete->mostrarDetalle(), C++ sabe
-        // automáticamente que debe llamar a la versión de 'Flete'
-        // porque ese es el objeto real que está guardado.
-        for (const auto& flete : fletes) {
-            flete->mostrarDetalle();
+bool Transportista::fleteExiste(int id) const {
+    for (const auto& flete : fletes) {
+        if (flete->getID() == id) {
+            return true; 
         }
     }
-
-    cout << "----------------------------------------" << endl;
-    cout << "TOTAL A PAGAR: $" << fixed << setprecision(0) << getCostoTotal() << endl;
-    cout << "----------------------------------------" << endl;
+    return false; 
 }
 
-// UPDATE 
-bool Transportista::actualizarFlete(int idFlete, int nuevaCantidad) {
-    Servicio* flete = getFlete(idFlete);
-    if (flete) {
-        // Aquí usamos el método 'setCantidad' de la interfaz 'Servicio'
-        // que será implementado por 'Flete'.
-        flete->setCantidad(nuevaCantidad);
-        return true;
-    }
-    return false; // No se encontró el flete
-}
-
-// DELETE 
-bool Transportista::eliminarFlete(int idFlete) {
-    // Usamos el "idioma" de C++ erase-remove para borrar un elemento
-    // del vector basado en una condición.
-    auto it = remove_if(fletes.begin(), fletes.end(),
-                             [idFlete](const unique_ptr<Servicio>& s) {
-                                 return s->getID() == idFlete;
-                             });
-
-    if (it != fletes.end()) {
-        fletes.erase(it, fletes.end()); // Aquí ocurre el borrado real
-        return true;
-    }
-    return false; // No se encontró
-}
-
-// Ayudante para calcular el total
-double Transportista::getCostoTotal() const {
-    double total = 0.0;
-    // --- COLABORACIÓN DE OBJETOS [cite: 30] ---
-    // El Transportista "colabora" con sus objetos Flete,
-    // pidiéndoles su costo y sumándolos.
+void Transportista::recalcularCostoTotal() {
+    costoTotal = 0.0;
     for (const auto& flete : fletes) {
-        total += flete->calcularCosto(); // <-- Polimorfismo otra vez
+        costoTotal += flete->calcularCosto();
     }
-    return total;
 }
 
-// Resetea la cuenta (como pediste en el brief)
+bool Transportista::agregarFlete(int id, int cantidad) {
+    if (fleteExiste(id)) {
+        return false; 
+    }
+    fletes.push_back(make_unique<Flete>(id, cantidad));
+    recalcularCostoTotal();
+    return true; 
+}
+
+// --- MODIFICADO ---
+// Añadida la palabra 'const' al final
+void Transportista::mostrarResumen() const {
+    cout << "\n=== RESUMEN DE TRANSPORTISTA ===" << endl;
+    cout << "Empresa: " << nombreEmpresa << " | RUT: " << rut << endl;
+    
+    if (fletes.empty()) {
+        cout << "No hay fletes registrados." << endl;
+        cout << "================================" << endl;
+        return;
+    }
+
+    cout << "Fletes registrados:" << endl;
+    for (const auto& flete : fletes) {
+        flete->mostrarDetalle(); 
+    }
+
+    cout << "--------------------------------" << endl;
+    cout << "COSTO TOTAL PROVISORIO: $" << fixed << setprecision(0) << costoTotal << endl;
+    cout << "================================" << endl;
+}
+
+bool Transportista::actualizarFlete(int idFlete, int nuevaCantidad) {
+    for (const auto& flete : fletes) {
+        if (flete->getID() == idFlete) {
+            flete->setCantidad(nuevaCantidad);
+            recalcularCostoTotal();
+            return true; 
+        }
+    }
+    return false; 
+}
+
+bool Transportista::eliminarFlete(int idFlete) {
+    auto old_size = fletes.size();
+    
+    fletes.erase(remove_if(fletes.begin(), fletes.end(),
+        [idFlete](const unique_ptr<Servicio>& s) {
+            return s->getID() == idFlete;
+        }), 
+        fletes.end());
+        
+    if (fletes.size() < old_size) {
+        recalcularCostoTotal(); 
+        return true;
+    }
+    return false; 
+}
+
 void Transportista::facturar() {
-    fletes.clear(); // Borra todos los fletes del vector
-    cout << ">> Cuenta de " << nombreEmpresa << " facturada y reseteada." << endl;
-}
-
-// Ayudante privado para buscar
-Servicio* Transportista::getFlete(int idFlete) {
-    // Usamos find_if para buscar en el vector
-    auto it = find_if(fletes.begin(), fletes.end(),
-                           [idFlete](const unique_ptr<Servicio>& s) {
-                               return s->getID() == idFlete;
-                           });
-
-    if (it != fletes.end()) {
-        return it->get(); // Devuelve el puntero 'raw' al objeto
-    }
-    return nullptr; // No encontrado
+    fletes.clear(); 
+    costoTotal = 0.0;
+    cout << ">> Facturacion completa. Fletes del transportista reseteados." << endl;
 }

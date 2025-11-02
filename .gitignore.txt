@@ -1,0 +1,7 @@
+# Archivos compilados de C++
+*.exe
+*.o
+*.out
+
+# Reportes generados por el programa
+*.csv

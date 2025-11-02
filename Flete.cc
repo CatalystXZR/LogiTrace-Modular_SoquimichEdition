@@ -1,18 +1,18 @@
-#include "Flete.h"
+#include "Flete.h" // Incluye su propio encabezado
 #include <iostream>
 #include <iomanip> // Para std::setprecision
+
 using namespace std;
 
 // Definimos e inicializamos la variable estática.
 const double Flete::PRECIO_POR_MAXISACO = 87000.0;
 
-// Constructor
+// Constructor: Llama al constructor de la clase base (Servicio)
 Flete::Flete(int id, int carga)
     : Servicio(id), cantidadCarga(carga) {}
 
-// Implementación de la lógica de negocio (tu `Calculate_freight_cost`)
+// Implementación de la lógica de negocio
 double Flete::calcularCosto() const {
-    // El 'const' al final significa que este método no modifica el objeto.
     return cantidadCarga * PRECIO_POR_MAXISACO;
 }
 
