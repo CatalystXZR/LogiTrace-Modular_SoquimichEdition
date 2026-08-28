@@ -19,11 +19,6 @@ LogiTrace follows an **orchestrator architecture**, allowing seamless integratio
 
 A demo version of LogiTrace is currently **under development**. For inquiries or to request a demo, please contact the development team.
 
-## Team
-
-- **Matías Toledo** – Product Lead  
-- **Benjamin Contreras** – Developer Lead  
-
 ## Roadmap
 
 - Complete core module development (Proformas, Guides, Inventory)  
@@ -40,7 +35,3 @@ We **welcome collaborators and contributors**! Any help, feedback, or ideas are 
 
 For questions, suggestions, or demo requests, please contact:  
 **Email:** CatalystXZR@proton.me
-
-## Staff
-- Matias Toledo - **Product Lead**
-- Benjamin Contreras - **Developer Lead**
